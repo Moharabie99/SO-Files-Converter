@@ -1,3 +1,9 @@
-streamlit==1.31.0
-pandas==2.1.4
-openpyxl==3.1.2
+streamlit>=1.31.0
+pandas>=2.2.0
+openpyxl>=3.1.2
+```
+
+### **2. Create `.python-version` file** (NEW FILE)
+Create a new file named `.python-version` (yes, with the dot at the beginning) with this content:
+```
+3.11
