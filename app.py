@@ -385,7 +385,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
         margin-bottom: 30px;
     ">
-        <img src="https://toppng.com/uploads/preview/mondelez-international-logo-11530963807eftwuglptg.png" style="
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZ2cZtsAToAq0VAlBwOMqgkuYtpaqO7WZO6wYS69uIw&s=10 " style="
             width: 90px;
             height: auto;
             margin-right: 25px;
