@@ -32,17 +32,10 @@ st.markdown("""
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
-    /* Main Header */
-    .main-header {
-        font-size: 3.5rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #3d005e, #4a0070, #2c5282);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-align: center;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 4px 8px rgba(74, 0, 112, 0.1);
+    /* Remove default padding */
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
     
     .sub-header {
@@ -53,12 +46,12 @@ st.markdown("""
         font-weight: 400;
     }
     
-    /* Step Frames */
-    .stContainer, div[data-testid="stVerticalBlock"] > div {
+    /* LabelFrame styling - only for the step sections */
+    div[data-testid="stExpander"], .stTabs {
         background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        border-radius: 20px;
-        padding: 25px;
-        box-shadow: 0 15px 40px rgba(74, 0, 112, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 8px 25px rgba(74, 0, 112, 0.08);
         border: 1px solid rgba(74, 0, 112, 0.05);
         margin-bottom: 20px;
     }
@@ -152,10 +145,10 @@ st.markdown("""
     /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
         gap: 10px;
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        background: white;
         padding: 10px;
         border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(74, 0, 112, 0.1);
+        box-shadow: 0 4px 15px rgba(74, 0, 112, 0.08);
     }
     
     .stTabs [data-baseweb="tab"] {
@@ -164,11 +157,13 @@ st.markdown("""
         padding: 12px 24px;
         font-weight: 600;
         color: #4a0070;
+        border: 2px solid transparent;
     }
     
     .stTabs [aria-selected="true"] {
         background: linear-gradient(135deg, #4a0070, #2c5282) !important;
         color: white !important;
+        border-color: transparent;
     }
     
     /* Expander */
@@ -224,23 +219,31 @@ st.markdown("""
     }
     
     /* Section Headers */
-    h2, h3 {
+    h1, h2, h3 {
         color: #3d005e;
         font-weight: 700;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
     }
     
     /* Hide Streamlit Branding */
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
+    header {visibility: hidden;}
     
-    /* Custom Animation */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    
+    /* Remove extra spacing */
     .element-container {
-        animation: fadeIn 0.5s ease-out;
+        margin-bottom: 0.5rem;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -370,7 +373,33 @@ def create_zip_file(processed_files):
     return zip_buffer
 
 # Main UI
-st.markdown('<div class="main-header">📊 CSV to Excel Converter</div>', unsafe_allow_html=True)
+# Header with logo
+st.markdown("""
+    <div style="
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #390856 0%, #4a0070 50%, #2c5282 100%);
+        padding: 25px 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
+        margin-bottom: 30px;
+    ">
+        <img src="https://iili.io/2c7elMQ.png" style="
+            width: 90px;
+            height: auto;
+            margin-right: 25px;
+            filter: drop-shadow(0 3px 6px rgba(255,255,255,0.1));
+        ">
+        <h1 style="
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            margin: 0;
+        ">Suggested Orders Files Converter</h1>
+    </div>
+""", unsafe_allow_html=True)
+
 st.markdown('<div class="sub-header">Process your suggested orders files with ease</div>', unsafe_allow_html=True)
 
 # Create tabs for better organization
@@ -639,7 +668,15 @@ with tab3:
 # Footer
 st.divider()
 st.markdown("""
-    <div style="text-align: center; color: #666; padding: 1rem;">
-        <small>CSV to Excel Converter | Process your files securely and efficiently</small>
+    <div style="
+        text-align: center;
+        padding: 30px 20px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+        margin-top: 40px;
+    ">
+        <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">
+            CSV to Excel Converter | Process your files securely and efficiently
+        </p>
     </div>
 """, unsafe_allow_html=True)
