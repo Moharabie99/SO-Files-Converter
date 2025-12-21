@@ -6,6 +6,13 @@ from datetime import datetime
 from io import BytesIO
 import zipfile
 
+# Streamlit page config must be first
+st.set_page_config(
+    page_title="Suggested Orders Files Converter",
+    page_icon="📊",
+    layout="wide"
+)
+
 # Page configuration
 st.set_page_config(
     page_title="Suggested Orders Files Converter",
@@ -13,42 +20,227 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for better styling
+# Custom CSS to match Django app design
 st.markdown("""
     <style>
+    /* Import fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+    
+    /* Global Styles */
+    .stApp {
+        background: linear-gradient(135deg, #e4d9f5 0%, #f0e8ff 50%, #e8f4f8 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* Main Header */
     .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #1f77b4;
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #3d005e, #4a0070, #2c5282);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
         margin-bottom: 0.5rem;
+        text-shadow: 0 4px 8px rgba(74, 0, 112, 0.1);
     }
+    
     .sub-header {
-        font-size: 1.2rem;
-        color: #666;
+        font-size: 1.3rem;
+        color: #6c757d;
         text-align: center;
         margin-bottom: 2rem;
+        font-weight: 400;
     }
+    
+    /* Step Frames */
+    .stContainer, div[data-testid="stVerticalBlock"] > div {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 15px 40px rgba(74, 0, 112, 0.1);
+        border: 1px solid rgba(74, 0, 112, 0.05);
+        margin-bottom: 20px;
+    }
+    
+    /* Success Box */
     .success-box {
-        padding: 1rem;
-        background-color: #d4edda;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
         border-left: 5px solid #28a745;
+        border-radius: 10px;
         margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
     }
+    
+    /* Info Box */
     .info-box {
-        padding: 1rem;
-        background-color: #d1ecf1;
-        border-left: 5px solid #17a2b8;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #e4d9f5 0%, #d1ecf1 100%);
+        border-left: 5px solid #4a0070;
+        border-radius: 10px;
         margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(74, 0, 112, 0.2);
     }
+    
+    /* Warning Box */
     .warning-box {
-        padding: 1rem;
-        background-color: #fff3cd;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
         border-left: 5px solid #ffc107;
+        border-radius: 10px;
         margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
     }
+    
+    /* Buttons */
     .stButton>button {
         width: 100%;
+        background: linear-gradient(135deg, #4a0070, #2c5282) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 16px 32px !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+        letter-spacing: 0.5px !important;
+        box-shadow: 0 8px 25px rgba(74, 0, 112, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stButton>button:hover {
+        background: linear-gradient(135deg, #370052, #1a365d) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(74, 0, 112, 0.4) !important;
+    }
+    
+    .stButton>button[kind="primary"] {
+        background: linear-gradient(135deg, #4a0070, #2c5282) !important;
+    }
+    
+    /* Download Buttons */
+    .stDownloadButton>button {
+        background: linear-gradient(135deg, #28a745, #20c997) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 12px 24px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3) !important;
+    }
+    
+    .stDownloadButton>button:hover {
+        background: linear-gradient(135deg, #218838, #17a2b8) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4) !important;
+    }
+    
+    /* File Uploader */
+    .stFileUploader {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        border: 2px dashed #4a0070;
+        box-shadow: 0 4px 15px rgba(74, 0, 112, 0.1);
+    }
+    
+    /* Progress Bar */
+    .stProgress > div > div > div > div {
+        background: linear-gradient(135deg, #4a0070, #2c5282) !important;
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 10px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(74, 0, 112, 0.1);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: transparent;
+        border-radius: 10px;
+        padding: 12px 24px;
+        font-weight: 600;
+        color: #4a0070;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #4a0070, #2c5282) !important;
+        color: white !important;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 10px;
+        font-weight: 600;
+        color: #3d005e;
+    }
+    
+    /* Metrics */
+    [data-testid="stMetricValue"] {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3d005e;
+    }
+    
+    /* Dataframe */
+    .stDataFrame {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(74, 0, 112, 0.1);
+    }
+    
+    /* Divider */
+    hr {
+        margin: 2rem 0;
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #4a0070, transparent);
+    }
+    
+    /* Selectbox */
+    .stSelectbox {
+        background: white;
+        border-radius: 10px;
+    }
+    
+    /* Text Input */
+    .stTextInput > div > div > input {
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+    }
+    
+    .stTextInput > div > div > input:focus {
+        border-color: #4a0070;
+        box-shadow: 0 0 0 0.2rem rgba(74, 0, 112, 0.25);
+    }
+    
+    /* Spinner */
+    .stSpinner > div {
+        border-top-color: #4a0070 !important;
+    }
+    
+    /* Section Headers */
+    h2, h3 {
+        color: #3d005e;
+        font-weight: 700;
+    }
+    
+    /* Hide Streamlit Branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* Custom Animation */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .element-container {
+        animation: fadeIn 0.5s ease-out;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -187,7 +379,7 @@ tab1, tab2, tab3 = st.tabs(["🔄 Process Files", "📖 Instructions", "ℹ️ A
 with tab1:
     # Step 1: Mapping File (Optional)
     st.subheader("Step 1: Upload Codes Mapping File (Optional)")
-    st.info("📝 Upload an Excel/CSV file with columns: **Old_Code** and **New_Code**")
+    st.markdown('<div class="info-box">📝 Upload an Excel/CSV file with columns: <strong>Old_Code</strong> and <strong>New_Code</strong></div>', unsafe_allow_html=True)
     
     mapping_file = st.file_uploader(
         "Select mapping file",
@@ -199,17 +391,17 @@ with tab1:
     if mapping_file:
         mapping, count, error = load_mapping_file(mapping_file)
         if error:
-            st.warning(f"⚠️ {error}")
+            st.markdown(f'<div class="warning-box">⚠️ {error}</div>', unsafe_allow_html=True)
             st.session_state.codes_mapping = {}
         else:
             st.session_state.codes_mapping = mapping
-            st.success(f"✅ Successfully loaded {count} code mappings")
+            st.markdown(f'<div class="success-box">✅ Successfully loaded {count} code mappings</div>', unsafe_allow_html=True)
     
     st.divider()
     
     # Step 2: Upload CSV Files
     st.subheader("Step 2: Upload CSV Files")
-    st.info("📁 Select all CSV files you want to process (you can select multiple files)")
+    st.markdown('<div class="info-box">📁 Select all CSV files you want to process (you can select multiple files)</div>', unsafe_allow_html=True)
     
     uploaded_files = st.file_uploader(
         "Choose CSV files",
@@ -219,7 +411,7 @@ with tab1:
     )
     
     if uploaded_files:
-        st.success(f"✅ {len(uploaded_files)} files uploaded")
+        st.markdown(f'<div class="success-box">✅ {len(uploaded_files)} files uploaded</div>', unsafe_allow_html=True)
         
         # Detect period from first file
         first_file_name = uploaded_files[0].name
@@ -336,37 +528,35 @@ with tab1:
             # Download Section
             st.subheader("💾 Download Processed Files")
             
-            # Create two columns for download options
-            col1, col2 = st.columns(2)
+            # Option 1: Download All Files as ZIP
+            st.markdown("### Option 1: Download All Files (ZIP)")
+            zip_data = create_zip_file(results['files'])
+            st.download_button(
+                label="📦 Download All Files as ZIP",
+                data=zip_data,
+                file_name=f"processed_files_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip",
+                mime="application/zip",
+                use_container_width=True,
+                type="primary"
+            )
             
-            with col1:
-                st.markdown("**Option 1: Download All Files (ZIP)**")
-                zip_data = create_zip_file(results['files'])
-                st.download_button(
-                    label="📦 Download All as ZIP",
-                    data=zip_data,
-                    file_name=f"processed_files_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip",
-                    mime="application/zip",
-                    use_container_width=True
-                )
+            st.markdown("---")
             
-            with col2:
-                st.markdown("**Option 2: Download Individual Files**")
-                selected_file = st.selectbox(
-                    "Select a file to download",
-                    options=[f['excel_name'] for f in results['files']]
-                )
-                
-                if selected_file:
-                    # Find the selected file
-                    file_info = next(f for f in results['files'] if f['excel_name'] == selected_file)
+            # Option 2: Download Individual Files
+            st.markdown("### Option 2: Download Individual Files")
+            
+            for idx, file_info in enumerate(results['files']):
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.text(f"{idx + 1}. {file_info['excel_name']} ({file_info['final_count']} records)")
+                with col2:
                     excel_data = create_excel_file(file_info['dataframe'])
-                    
                     st.download_button(
-                        label=f"📥 Download {selected_file}",
+                        label="Download",
                         data=excel_data,
-                        file_name=selected_file,
+                        file_name=file_info['excel_name'],
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        key=f"download_{idx}",
                         use_container_width=True
                     )
 
