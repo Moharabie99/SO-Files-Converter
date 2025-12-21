@@ -368,9 +368,10 @@ def create_zip_file(processed_files):
     with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
         for file_info in processed_files:
             excel_data = create_excel_file(file_info['dataframe'])
-            zip_file.writestr(file_info['excel_name'], excel_data.getvalue())
+            excel_bytes = excel_data.getvalue()
+            zip_file.writestr(file_info['excel_name'], excel_bytes)
     zip_buffer.seek(0)
-    return zip_buffer
+    return zip_buffer.getvalue()
 
 # Main UI
 # Header with logo
@@ -559,29 +560,45 @@ with tab1:
             
             # Option 1: Download All Files as ZIP
             st.markdown("### Option 1: Download All Files (ZIP)")
-            zip_data = create_zip_file(results['files'])
-            st.download_button(
-                label="📦 Download All Files as ZIP",
-                data=zip_data,
-                file_name=f"processed_files_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip",
-                mime="application/zip",
-                use_container_width=True,
-                type="primary"
-            )
+            
+            try:
+                zip_data = create_zip_file(results['files'])
+                
+                col1, col2 = st.columns([2, 1])
+                with col1:
+                    st.download_button(
+                        label="📦 Download All Files as ZIP",
+                        data=zip_data,
+                        file_name=f"processed_files_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip",
+                        mime="application/zip",
+                        use_container_width=True,
+                        type="primary",
+                        key="download_zip"
+                    )
+                with col2:
+                    st.metric("Total Size", f"{len(zip_data) / 1024:.1f} KB")
+                
+                st.caption("💡 Click the button above to download all files in one ZIP archive")
+            except Exception as e:
+                st.error(f"Error creating ZIP file: {str(e)}")
+                st.info("Please download files individually below")
             
             st.markdown("---")
             
             # Option 2: Download Individual Files
             st.markdown("### Option 2: Download Individual Files")
+            st.caption("Click the download button next to each file")
             
             for idx, file_info in enumerate(results['files']):
-                col1, col2 = st.columns([3, 1])
+                col1, col2, col3 = st.columns([3, 1, 1])
                 with col1:
-                    st.text(f"{idx + 1}. {file_info['excel_name']} ({file_info['final_count']} records)")
+                    st.text(f"📄 {file_info['excel_name']}")
                 with col2:
+                    st.text(f"{file_info['final_count']} records")
+                with col3:
                     excel_data = create_excel_file(file_info['dataframe'])
                     st.download_button(
-                        label="Download",
+                        label="⬇️",
                         data=excel_data,
                         file_name=file_info['excel_name'],
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -636,7 +653,7 @@ with tab3:
     st.subheader("ℹ️ About This Tool")
     
     st.markdown("""
-    ### CSV to Excel Converter
+    ### Suggested Orders Files Converter
     
     **Version:** 1.0.0  
     **Last Updated:** December 2024
@@ -676,7 +693,7 @@ st.markdown("""
         margin-top: 40px;
     ">
         <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">
-            CSV to Excel Converter | Process your files securely and efficiently
+            Suggested Orders Files Converter | Process your files securely and efficiently
         </p>
     </div>
 """, unsafe_allow_html=True)
