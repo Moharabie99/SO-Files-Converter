@@ -385,7 +385,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
         margin-bottom: 30px;
     ">
-        <img src="https://iili.io/2c7elMQ.png" style="
+        <img src="https://www.google.com/search?client=ms-android-xiaomi-rvo3&hs=ITg9&sca_esv=1760fc6ed6026b55&sxsrf=AE3TifNXsiq-7sS5vwwI5UuTWPZFpt0BEA:1766311738348&udm=2&fbs=AIIjpHxU7SXXniUZfeShr2fp4giZ1Y6MJ25_tmWITc7uy4KIeuYzzFkfneXafNx6OMdA4MQRJc_t_TQjwHYrzlkIauOK_IaFSQcTHs2AgJbmYqOLNlPDT0Hy19TTgd1LyYk-nASP6vwo8-B6loSdTVvF3_GZBJusZZNw-Uezjl8_00i03ll714EA68oITA54h8QJp2kmqAnvPuCTjyqXZS2x92z99z253Q&q=mondelez+international+logo+png&sa=X&sqi=2&ved=2ahUKEwiNg-j9t86RAxUcAtsEHeRxEQ0QtKgLegQIEBAB&biw=392&bih=734&dpr=2.75#sv=CAMSjQUa7QQKnQIKuQEStgEKd0FMa3RfdkZhTXZmWDYzU29DbkFORmZjcXpSd0lkMHQyVkhaWTlxTVVhWDVpYTdmRUl5bGhjX0ZxYUhJeVRrNGEzcThPTk9sbnJfdEljVHlFblJHR0cyYVp2NnVMVEVCNnNIcmFvb2syeWxHRUpvakdJQ3FvZDV3EhdQTWRIYVpUS09Lbk1rZFVQNDczaG1BURoiQUZNQUdHcjE2Q204VXNpV1BJM1pLVk5idUlYczg4QWJndxIDODQ5GgEzIiQKAXESH21vbmRlbGV6IGludGVybmF0aW9uYWwgbG9nbyBwbmciBwoDdGJzEgAiKAoEZXFsZBIgQ2dJSUFCQUFPZ1FJQUJBQVZUczZRRDVnQVczbVZFTV8SuAIKzwESzAEKjAFBTGt0X3ZFWXRjRG5TVndHNnZRdTFYMm9ld0xqVGRtb194VjZ6Tlo1Q1A2Q3l2dWs4WFRDQTNzc21rUUZDVXZmeDJ0VXNCVURUTlVfaWFjWWw3dWh5YW5ldFBGdG9fWXR1OG9JbjhXUk1HSFpnTFMwZjRORDdqSks4bEVHN0tHRzJOYVlTaE5oUlctVRIXUE1kSGFaVEtPS25Na2RVUDQ3M2htQVEaIkFGTUFHR3J5cFhGb1VEOWthem9xTXhWekFiYTlTakxoakESBDQ2OTgaATMiGAoGaW1nZGlpEg5EdWtya1ZNbXM2akU5TSIXCgVkb2NpZBIOZDRmcktaRzVwYjZwcU0iKAoEZXFsZBIgQ2dJSUFCQUFPZ1FJQUJBQVZUczZRRDVnQVczbVZFTV8qEGUtRHVrcmtWTW1zNmpFOU0gBCoXCgFzEhBlLUR1a3JrVk1tczZqRTlNGAEwARgHIJCA4pwPMAFKCggCEAIYAiACKAI " style="
             width: 90px;
             height: auto;
             margin-right: 25px;
