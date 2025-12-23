@@ -8,14 +8,14 @@ import zipfile
 
 # Streamlit page config must be first
 st.set_page_config(
-    page_title="Suggested Orders Files Converter",
+    page_title="CSV to Excel Converter",
     page_icon="📊",
     layout="wide"
 )
 
 # Page configuration
 st.set_page_config(
-    page_title="Suggested Orders Files Converter",
+    page_title="CSV to Excel Converter",
     page_icon="📊",
     layout="wide"
 )
@@ -323,6 +323,9 @@ def process_csv_file(csv_file, codes_mapping):
         df["Unit Sales"] = df["Unit Sales"].astype(str)
         df["Monthno"] = df["Monthno"].astype(str)
         
+        # Pad month to 2 digits for SAP (1 -> 01, 10 -> 10)
+        df["Monthno"] = df["Monthno"].str.zfill(2)
+        
         # Product Flag conversion
         df["Material Type"] = df["Product Flag"].apply(product_flag)
         
@@ -385,7 +388,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
         margin-bottom: 30px;
     ">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgZ2cZtsAToAq0VAlBwOMqgkuYtpaqO7WZO6wYS69uIw&s=10 " style="
+        <img src="https://iili.io/2c7elMQ.png" style="
             width: 90px;
             height: auto;
             margin-right: 25px;
@@ -397,7 +400,7 @@ st.markdown("""
             color: white;
             text-shadow: 0 3px 6px rgba(0,0,0,0.1);
             margin: 0;
-        ">Suggested Orders Files Converter</h1>
+        ">CSV to Excel Converter</h1>
     </div>
 """, unsafe_allow_html=True)
 
@@ -653,10 +656,10 @@ with tab3:
     st.subheader("ℹ️ About This Tool")
     
     st.markdown("""
-    ### Suggested Orders Files Converter
+    ### CSV to Excel Converter
     
     **Version:** 1.0.0  
-    **Last Updated:** December 2024
+    **Last Updated:** December 2025
     
     This tool helps you convert suggested orders CSV files to Excel format with automatic data transformation and validation.
     
@@ -693,7 +696,7 @@ st.markdown("""
         margin-top: 40px;
     ">
         <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">
-            Suggested Orders Files Converter | Process your files securely and efficiently
+            CSV to Excel Converter | Process your files securely and efficiently
         </p>
     </div>
 """, unsafe_allow_html=True)
