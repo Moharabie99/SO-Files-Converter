@@ -388,7 +388,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
         margin-bottom: 30px;
     ">
-        <img src="https://1000logos.net/wp-content/uploads/2020/09/Mondelez-Logo.png " style="
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDA4E7k3f7t4k7nBVvvh1axpGo1OwByj1rga1P50dZg0upHPkMLGn8LiU&s=10 " style="
             width: 90px;
             height: auto;
             margin-right: 25px;
