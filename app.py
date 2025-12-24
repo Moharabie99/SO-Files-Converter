@@ -678,7 +678,7 @@ with tab3:
     - No data storage or logging
     
     ### Support:
-    If you encounter any issues or have questions, please contact your IT administrator.
+    If you encounter any issues or have questions, please contact Digitalization Team.
     
     ---
     
