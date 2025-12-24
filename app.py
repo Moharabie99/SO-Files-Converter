@@ -8,14 +8,14 @@ import zipfile
 
 # Streamlit page config must be first
 st.set_page_config(
-    page_title="CSV to Excel Converter",
+    page_title="SO Files Converter",
     page_icon="📊",
     layout="wide"
 )
 
 # Page configuration
 st.set_page_config(
-    page_title="CSV to Excel Converter",
+    page_title="SO Files Converter",
     page_icon="📊",
     layout="wide"
 )
@@ -400,7 +400,7 @@ st.markdown("""
             color: white;
             text-shadow: 0 3px 6px rgba(0,0,0,0.1);
             margin: 0;
-        ">CSV to Excel Converter</h1>
+        ">Suggested Orders Files Converter</h1>
     </div>
 """, unsafe_allow_html=True)
 
@@ -656,7 +656,7 @@ with tab3:
     st.subheader("ℹ️ About This Tool")
     
     st.markdown("""
-    ### CSV to Excel Converter
+    ### Suggested Orders Files Converter
     
     **Version:** 1.0.0  
     **Last Updated:** December 2025
@@ -696,7 +696,7 @@ st.markdown("""
         margin-top: 40px;
     ">
         <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">
-            CSV to Excel Converter | Process your files securely and efficiently
+            Suggested Orders Files Converter | Process your files securely and efficiently
         </p>
     </div>
 """, unsafe_allow_html=True)
