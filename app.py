@@ -8,14 +8,14 @@ import zipfile
 
 # Streamlit page config must be first
 st.set_page_config(
-    page_title="CSV to Excel Converter",
+    page_title="Suggested Orders Files Converter",
     page_icon="📊",
     layout="wide"
 )
 
 # Page configuration
 st.set_page_config(
-    page_title="CSV to Excel Converter",
+    page_title="Suggested Orders Files Converter",
     page_icon="📊",
     layout="wide"
 )
@@ -321,7 +321,7 @@ def process_csv_file(csv_file, codes_mapping):
         
         # Apply transformations
         df["Unit Sales"] = df["Unit Sales"].astype(str)
-        df["Monthno"] = df["Monthno"].astype(str)
+        df["Monthno"] = df["Monthno"].astype(str).str.zfill(2)  # Zero-pad to 2 digits
         
         # Product Flag conversion
         df["Material Type"] = df["Product Flag"].apply(product_flag)
@@ -385,7 +385,7 @@ st.markdown("""
         box-shadow: 0 10px 30px rgba(74, 0, 112, 0.3);
         margin-bottom: 30px;
     ">
-        <img src="https://iili.io/2c7elMQ.png" style="
+        <img src="https://awarego.com/wp-content/uploads/2021/04/mdlz.png" style="
             width: 90px;
             height: auto;
             margin-right: 25px;
@@ -397,7 +397,7 @@ st.markdown("""
             color: white;
             text-shadow: 0 3px 6px rgba(0,0,0,0.1);
             margin: 0;
-        ">CSV to Excel Converter</h1>
+        ">Suggested Orders Files Converter</h1>
     </div>
 """, unsafe_allow_html=True)
 
