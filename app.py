@@ -538,7 +538,7 @@ with tab1:
                     'Dropped': file_info['original_count'] - file_info['final_count']
                 })
             
-            st.dataframe(pd.DataFrame(file_data), width=None)
+            st.dataframe(pd.DataFrame(file_data), width='stretch')
             
             # Errors (if any)
             if results['errors']:
