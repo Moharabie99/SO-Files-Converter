@@ -6,14 +6,7 @@ from datetime import datetime
 from io import BytesIO
 import zipfile
 
-# Streamlit page config must be first
-st.set_page_config(
-    page_title="Suggested Orders Files Converter",
-    page_icon="📊",
-    layout="wide"
-)
-
-# Page configuration
+# Streamlit page config must be first - ONLY ONE CALL
 st.set_page_config(
     page_title="Suggested Orders Files Converter",
     page_icon="📊",
@@ -463,7 +456,7 @@ with tab1:
         
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            if st.button("🚀 Process All Files", type="primary", use_container_width=True):
+            if st.button("🚀 Process All Files", type="primary", key="process_button"):
                 with st.spinner("Processing files... Please wait"):
                     progress_bar = st.progress(0)
                     status_text = st.empty()
@@ -545,7 +538,7 @@ with tab1:
                     'Dropped': file_info['original_count'] - file_info['final_count']
                 })
             
-            st.dataframe(pd.DataFrame(file_data), use_container_width=True)
+            st.dataframe(pd.DataFrame(file_data), width=None)
             
             # Errors (if any)
             if results['errors']:
@@ -571,7 +564,6 @@ with tab1:
                         data=zip_data,
                         file_name=f"processed_files_{datetime.now().strftime('%Y%m%d_%H%M%S')}.zip",
                         mime="application/zip",
-                        use_container_width=True,
                         type="primary",
                         key="download_zip"
                     )
@@ -602,8 +594,7 @@ with tab1:
                         data=excel_data,
                         file_name=file_info['excel_name'],
                         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        key=f"download_{idx}",
-                        use_container_width=True
+                        key=f"download_{idx}"
                     )
 
 with tab2:
